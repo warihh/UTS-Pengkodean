@@ -1,10 +1,9 @@
-# Paket UTS Coding Akuntansi FEB UNDIP
-Buka folder ini di VS Code. Semua nomor disimpan dalam satu repository induk, tetapi dipisah per folder agar mudah diperiksa.
+Kesimpulan
 
 - `soal-1/`: ERD, DDL PostgreSQL, kontrol double-entry, analisis 3NF.
 - `soal-2/`: schema dan trigger persediaan, uji, penjelasan concurrency.
 - `soal-3/`: prototype voucher kas keluar, Supabase RPC/schema, prompt log AI.
-- `panduan/`: langkah per nomor dan kerangka dokumentasi.
+- `prompt/`: prompt yang digunakan untuk mencari yang dibutuhkan
 
 ## Tools
 VS Code disarankan untuk semua nomor. PostgreSQL diperlukan untuk menguji SQL nomor 1 dan 2. Supabase adalah pilihan cloud yang disebut di nomor 3. Gemini Canvas dan NotebookLM diminta khusus nomor 3.1. Simpan bukti dan hasil AI yang benar-benar diperoleh, jangan mengarang log.
