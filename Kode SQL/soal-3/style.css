@@ -1,112 +1,84 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Voucher Kas Keluar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body class="min-h-screen bg-slate-100 text-slate-900">
-    <header class="bg-slate-950 text-white">
-      <div class="mx-auto flex max-w-6xl items-center justify-between p-5">
-        <div>
-          <p class="text-xs uppercase tracking-widest text-slate-400">
-            Accounting Control
-          </p>
-          <h1 class="text-xl font-black">Voucher Kas Keluar</h1>
-        </div>
-        <span
-          id="connection"
-          class="rounded-full bg-amber-400/20 px-3 py-2 text-xs"
-          >Mode demo</span
-        >
-      </div>
-    </header>
-    <main class="mx-auto max-w-6xl space-y-5 p-4 py-8">
-      <section class="grid gap-4 md:grid-cols-3">
-        <div class="card">
-          <p>Total Debit</p>
-          <strong id="td">Rp0</strong>
-        </div>
-        <div class="card">
-          <p>Total Kredit</p>
-          <strong id="tc">Rp0</strong>
-        </div>
-        <div id="balance-card" class="card">
-          <p>Status</p>
-          <strong id="status">Belum seimbang</strong><span id="diff"></span>
-        </div>
-      </section>
-      <section class="card">
-        <h2 class="text-xl font-black">Detail Voucher</h2>
-        <form id="form" class="mt-5 space-y-5">
-          <div class="grid gap-4 md:grid-cols-3">
-            <label
-              >Nomor Voucher<input id="no" class="control" required /></label
-            ><label
-              >Tanggal<input
-                id="date"
-                type="date"
-                class="control"
-                required /></label
-            ><label
-              >Deskripsi<input id="desc" class="control" required
-            /></label>
-          </div>
-          <div class="flex items-center justify-between">
-            <h3 class="font-bold">Baris jurnal</h3>
-            <button id="add" type="button" class="secondary">
-              + Tambah baris
-            </button>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[700px] text-sm">
-              <thead>
-                <tr>
-                  <th>Akun</th>
-                  <th>Keterangan</th>
-                  <th>Debit</th>
-                  <th>Kredit</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="lines"></tbody>
-            </table>
-          </div>
-          <p id="message" class="rounded-xl bg-slate-50 p-3 text-sm"></p>
-          <button id="submit" disabled class="submit">Submit & Posting</button>
-        </form>
-      </section>
-      <section class="card">
-        <h2 class="font-black">Riwayat voucher</h2>
-        <div class="mt-3 overflow-x-auto">
-          <table class="w-full min-w-[600px] text-sm">
-            <thead>
-              <tr>
-                <th>Nomor</th>
-                <th>Tanggal</th>
-                <th>Deskripsi</th>
-                <th>Debit</th>
-                <th>Kredit</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody id="history"></tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-    <div
-      id="toast"
-      class="fixed bottom-4 right-4 hidden rounded-xl bg-slate-900 p-4 text-sm text-white"
-    ></div>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase-config.js"></script>
-    <script src="app.js"></script>
-  </body>
-</html>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Inter, system-ui, sans-serif;
+}
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 5px 20px #0f172a08;
+}
+.card p {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #64748b;
+}
+.card strong {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 0.4rem 0;
+}
+.card.balanced {
+  background: #f7fee7;
+  border-color: #84cc16;
+}
+.card.unbalanced {
+  background: #fff1f2;
+  border-color: #fca5a5;
+}
+label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+}
+label .control {
+  display: block;
+  width: 100%;
+  margin-top: 0.4rem;
+}
+.control,
+.line-input,
+.account {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.6rem;
+  padding: 0.65rem;
+  width: 100%;
+  background: white;
+}
+.secondary {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  font-weight: 800;
+}
+.submit {
+  background: #84cc16;
+  border-radius: 0.7rem;
+  padding: 0.8rem 1rem;
+  font-weight: 900;
+}
+.submit:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+}
+th,
+td {
+  text-align: left;
+  padding: 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+th {
+  background: #f8fafc;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.remove {
+  color: #b91c1c;
+  padding: 0.5rem;
+}
