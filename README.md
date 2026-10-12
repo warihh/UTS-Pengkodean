@@ -1,4 +1,4 @@
-### Kesimpulan
+## Hasil
 
 - `soal-1/`: ERD, DDL PostgreSQL, kontrol double-entry, analisis 3NF.
 - `soal-2/`: schema dan trigger persediaan, uji, penjelasan concurrency.
